@@ -67,6 +67,7 @@ Documentation, https://docs.arduino.cc/learn/starting-guide/whats-arduino.
 | Type    | Input | Process | Anticipated Outcome |
 | ------- | ----- | ------- | ------------------- |
 | *Insert |       |         |                     |
+|         |       |         |                     |
 
 # Criteria C: Development
 
