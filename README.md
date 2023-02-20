@@ -1,3 +1,5 @@
+![](study_nihongo.jpeg)
+
 # Unit 3 Project: Japanese Vocab Revision App
 
 ## Criteria A: Planning
@@ -11,6 +13,8 @@ Alessandro is a student studying Japanese ab initio in UWC ISAK Japan. He is fin
 Considering the client's requirements, an adequate solution would include a localized computer program with a GUI(Graphical User Interface) that can store data into a database. Python would be an adequate programming language for the solution as it is open source, it is mature and supported in mutiple platforms (platform-independent) including macOS, Windows, Linux.[^1]
 
 **Design statement**  
+
+
 
 [^1]: Python Geeks. “Advantages of Python: Disadvantages of Python.” Python Geeks, 26 June 2021, https://pythongeeks.org/advantages-disadvantages-of-python/.
 
@@ -42,19 +46,16 @@ Considering the client's requirements, an adequate solution would include a loca
 | Task No | Planned Action                                   | Planned Outcome                                          | Time estimate | Target completion date | Criterion |
 | ------- | ------------------------------------------------ | -------------------------------------------------------- | ------------- | ---------------------- | --------- |
 | 1       | Planning: First Meeting with client              | Start collecting the context of the problem              | 6min          | Feb 7                  | A         |
-| 2       | Planning: Defining problem and proposed solution | Start on refining client's requirements and tools needed | 1hr           | Feb 15                 | A         |
+| 2       | Planning: Defining problem and proposed solution | Start on refining client's requirements and tools needed | 2hr           | Feb 15                 | A         |
+| 3       | Coding: Initializing codebase                    | To have the base environment of program ready for coding | 1hr           | Feb 20                 | C         |
 
 ## Flow Diagrams
 
 ### MVP Program
 
-![](Assets/MVP_FD2.jpg)
-
 *Fig.2* **Flow diagram for the MVP program.**
 
 ### Main Program
-
-![](Assets/MAIN_FD2.jpg)
 
 *Fig.3 **Flow diagram for the main program.**
 
@@ -69,9 +70,14 @@ Considering the client's requirements, an adequate solution would include a loca
 
 ## Existing Tools
 
-| Software/Development Tools | Coding Structure Tools | Libraries |
-| -------------------------- | ---------------------- | --------- |
-| *Insert                    |                        |           |
+| Software/Development Tools | Coding Structure Tools  | Libraries  |
+| -------------------------- | ----------------------- | ---------- |
+| PyCharm                    | OOP Structures(Classes) | Kivymd.app |
+| Python                     | SQL requests            | Passlib    |
+| SQLite                     | Databases               | sqlalchemy |
+| KivyMD                     | Encryption              |            |
+|                            | For Loops               |            |
+|                            | If-then-else statements |            |
 
 ## List of techniques used
 
