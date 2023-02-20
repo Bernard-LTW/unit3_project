@@ -45,7 +45,7 @@ class database_handler:
         if not user:
             return False
 
-        if check_password(password, user.hashed_password):
+        if check_password(password, user.password):
             return True
         else:
             return False

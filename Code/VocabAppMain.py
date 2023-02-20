@@ -30,15 +30,14 @@ class RegisterScreen(MDScreen):
             pwd = hash_password(pwd)
             self.ids.cpwd.error = False
             self.ids.cpwd.md_bg_color = "green"
-            db = database_handler("login_database.db")
+            db = database_handler("vocab_app.db")
             db.insert_user(email, uname, pwd)
             db.close()
             self.parent.current = "LoginScreen"
 
 
 class VocabApp(MDApp):
-    db = database_handler("login_database.db")
-    db.create_table()
+    db = database_handler("vocab_app.db")
     def build(self):
         return
 
