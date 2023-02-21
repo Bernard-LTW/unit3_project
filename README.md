@@ -48,6 +48,7 @@ Considering the client's requirements, an adequate solution would include a loca
 | 1       | Planning: First Meeting with client              | Start collecting the context of the problem              | 6min          | Feb 7                  | A         |
 | 2       | Planning: Defining problem and proposed solution | Start on refining client's requirements and tools needed | 2hr           | Feb 15                 | A         |
 | 3       | Coding: Initializing codebase                    | To have the base environment of program ready for coding | 1hr           | Feb 20                 | C         |
+| 4       | Planning : Second Meeting with client            | Decided success criteria                                 | 5min          | Feb 21                 | A         |
 
 ## Flow Diagrams
 

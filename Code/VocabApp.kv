@@ -3,6 +3,8 @@ ScreenManager:
         name: "LoginScreen"
     RegisterScreen:
         name: "RegisterScreen"
+    LandingScreen:
+        name: "LandingScreen"
 
 <LoginScreen>:
     FitImage:
@@ -109,4 +111,35 @@ ScreenManager:
                 size_hint: .5,1
                 md_bg_color: "#a8dadc"
                 pos_hint: {"center_y":.5}
-                on_press: root.register()
+                on_press:
+                    root.register()
+                    root.manager.current = "LoginScreen"
+
+<LandingScreen>:
+    FitImage:
+        source:"material-design-abstract-4k_1608576664.jpg"
+    MDCard:
+        size_hint: .6,.8
+        pos_hint: {"center_x":.5, "center_y":.5}
+        orientation:"vertical"
+
+        MDLabel:
+            size_hint: 1,.1
+            font_style:"H2"
+            text:"Welcome"
+            halign:"center"
+        MDLabel:
+            id: welcome
+            size_hint: 1,.1
+            font_style:"H4"
+            text:"Welcome"
+            halign:"center"
+        MDBoxLayout:
+            size_hint: 1,.1
+            MDRaisedButton:
+                id : logout
+                text:"Logout"
+                size_hint: .5,1
+                md_bg_color: "#e63946"
+                pos_hint: {"center_y":.5}
+                on_press: root.logout()

@@ -1,7 +1,4 @@
-from kivymd.app import MDApp
-
-#Login App
-
+#VocabAppMain.py
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from secure_password import hash_password
@@ -11,10 +8,12 @@ class LoginScreen(MDScreen):
         print(f"Username: {self.ids.uname.text} Password: {self.ids.pwd.text}")
         username = self.ids.uname.text
         password = self.ids.pwd.text
-        if  VocabApp.db.login_check(username, password) == True:
+        if VocabApp.db.login_check(username, password):
             print("Login success")
+            self.parent.current = "LandingScreen"
         else:
             print("Login failed")
+
 class RegisterScreen(MDScreen):
     def register(self):
         print(f"Username: {self.ids.uname.text} Email:{self.ids.email.text} Password: {self.ids.pwd.text}")
@@ -35,7 +34,8 @@ class RegisterScreen(MDScreen):
             db.close()
             self.parent.current = "LoginScreen"
 
-
+class LandingScreen(MDScreen):
+    pass
 class VocabApp(MDApp):
     db = database_handler("vocab_app.db")
     def build(self):

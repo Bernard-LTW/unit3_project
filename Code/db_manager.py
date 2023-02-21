@@ -1,10 +1,9 @@
-import sqlite3
-from secure_password import hash_password, check_password
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
-from models import Users, Base
+from models import Users, Base, Vocabulary, UserStats
+from secure_password import check_password
+
 
 def create_base():
     engine = create_engine('sqlite:///vocab_app.db')
@@ -49,6 +48,12 @@ class database_handler:
             return True
         else:
             return False
+
+
+
+    def get_vocab(self, user_id):
+        vocab = self.session.query(Vocabulary).filter_by(user_id=user_id).all()
+        return vocab
 
 create_base()
 test = database_handler("vocab_app.db")
