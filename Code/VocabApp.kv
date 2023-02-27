@@ -5,6 +5,15 @@ ScreenManager:
         name: "RegisterScreen"
     LandingScreen:
         name: "LandingScreen"
+    ManageVocabScreen:
+        name: "ManageVocabScreen"
+    RandomVocabScreen:
+        name: "RandomVocabScreen"
+    VocabChooserScreen:
+        name: "VocabChooserScreen"
+    VocabCardScreen:
+        name: "VocabCardScreen"
+
 
 <LoginScreen>:
     FitImage:
@@ -124,6 +133,7 @@ ScreenManager:
         orientation:"vertical"
 
         MDLabel:
+            id: welcome_banner
             size_hint: 1,.1
             font_style:"H2"
             text:"Welcome"
@@ -135,11 +145,41 @@ ScreenManager:
             text:"Welcome"
             halign:"center"
         MDBoxLayout:
-            size_hint: 1,.1
+            size_hint: 1,.7
+            orientation:"vertical"
+            MDRaisedButton:
+                id : managevocab
+                text:"Manage Vocab"
+                size_hint: 1,.2
+                md_bg_color: "#a8dadc"
+                pos_hint: {"center_y":.5}
+                on_press:
+                    root.manager.current = "ManageVocabScreen"
+                    root.manager.transition.direction = "left"
+            MDRaisedButton:
+                id : randomvocab
+                text:"Random Vocab"
+                size_hint: 1,.2
+                md_bg_color: "#a8dadc"
+                pos_hint: {"center_y":.5}
+                on_press:
+                    root.manager.current = "RandomVocabScreen"
+                    root.manager.transition.direction = "left"
+            MDRaisedButton:
+                id : vocabchooser
+                text:"Choose Vocab"
+                size_hint: 1,.2
+                md_bg_color: "#a8dadc"
+                pos_hint: {"center_y":.5}
+                on_press:
+                    root.manager.current = "VocabChooserScreen"
+                    root.manager.transition.direction = "left"
+        MDBoxLayout:
+            size_hint: 1,0.1
             MDRaisedButton:
                 id : logout
                 text:"Logout"
                 size_hint: .5,1
+                pos_hint: {"center_x":.5}
                 md_bg_color: "#e63946"
-                pos_hint: {"center_y":.5}
                 on_press: root.logout()
