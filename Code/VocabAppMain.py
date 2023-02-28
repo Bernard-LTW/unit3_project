@@ -5,6 +5,7 @@ from kivymd.uix.screen import MDScreen
 from secure_password import hash_password
 from db_manager import database_handler
 from models import Users, Vocabulary, UserStats
+from kivy.logger import Logger
 
 global current_user
 current_user = None
@@ -15,11 +16,11 @@ class LoginScreen(MDScreen):
         username = self.ids.uname.text
         password = self.ids.pwd.text
         if VocabApp.db.login_check(username, password):
-            print("Login success")
+            Logger.info("Login successful")
             self.parent.current = "LandingScreen"
             global current_user
             current_user = VocabApp.db.session.query(Users).filter_by(username=username).first()
-            print(f"Current user: {current_user.username}")
+            Logger.info(f"Current user: {current_user.username}")
             self.ids.uname.text = ""
             self.ids.pwd.text = ""
         else:

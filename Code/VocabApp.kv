@@ -15,6 +15,8 @@ ScreenManager:
         name: "VocabCardScreen"
     PerVocabManageScreen:
         name: "PerVocabManageScreen"
+
+
 <JapaneseTextField@MDTextField>:
     font_name: 'Japanese.ttc'
     input_type: 'text'
@@ -242,6 +244,40 @@ ScreenManager:
                 on_press:
                     root.manager.current = "PerVocabManageScreen"
                     root.manager.transition.direction = "left"
+
+<PerVocabManageScreen>:
+    MDRaisedButton:
+        id : back
+        text:"Back"
+        size_hint: .2,.1
+        pos_hint: {"center_x":.1 , "center_y":.95}
+        md_bg_color: "#e63946"
+        on_press:
+            root.manager.current = "ManageVocabScreen"
+            root.manager.transition.direction = "right"
+    MDBoxLayout:
+        pos_hint: {"center_x":.5, "center_y":.2}
+        size_hint: 1,.1
+        MDBoxLayout:
+            size_hint: 1,1
+            MDLabel:
+                id: vocab
+                size_hint: .5,1
+                text:"Vocab"
+                halign:"center"
+            JapaneseTextField:
+                id: selected_lesson
+                size_hint: .5,1
+                hint_text:"Lesson"
+                helper_text: "Enter lesson number"
+                helper_text_mode: "on_error"
+            JapaneseTextField:
+                id: selected_part
+                size_hint: .5,1
+                hint_text:"Part of Lesson"
+                helper_text: "Enter part number"
+                helper_text_mode: "on_error"
+
 
 
 
