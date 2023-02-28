@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from models import Vocabulary, Base
 
 # create an engine and session
-engine = create_engine('sqlite:///vocab_app.db')
+engine = create_engine('sqlite:///vocab_app.db', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -19,6 +19,10 @@ dummy_data = [
 
 # insert the dummy data into the Vocabulary table
 for data in dummy_data:
+    #data['katakana'] = data['katakana'].encode('utf-16')
+    #print(data['katakana'])
+    #data['hiragana'] = data['hiragana'].encode('utf-16')
+    #print(data['hiragana'])
     vocab = Vocabulary(**data)
     session.add(vocab)
 

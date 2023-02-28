@@ -1,14 +1,10 @@
 #VocabAppMain.py
-from kivy.metrics import dp
-from kivy.uix.gridlayout import GridLayout
 from kivymd.app import MDApp
 from kivymd.uix.datatables import MDDataTable
-from kivymd.uix.fitimage import FitImage
 from kivymd.uix.screen import MDScreen
 from secure_password import hash_password
 from db_manager import database_handler
 from models import Users, Vocabulary, UserStats
-from kivy.lang import Builder
 
 global current_user
 current_user = None
@@ -101,6 +97,8 @@ class ManageVocabScreen(MDScreen):
         for row in rows:
             print(row)
             print(row.id)
+            row.hiragana = f"[font=Japanese.ttc]{row.hiragana}[/font]"
+            row.katakana = f"[font=Japanese.ttc]{row.katakana}[/font]"
             row = [str(row.id), str(row.lesson), str(row.part_of_lesson), row.hiragana, row.katakana, row.definition]
             print(row)
             if row not in self.data_table.row_data:
