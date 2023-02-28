@@ -44,10 +44,7 @@ class database_handler:
         if not user:
             return False
 
-        if check_password(password, user.password):
-            return True
-        else:
-            return False
+        return bool(check_password(password, user.password))
 
     def get_vocab(self):
         vocab = self.session.query(Vocabulary).all()
