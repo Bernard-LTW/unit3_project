@@ -1,12 +1,18 @@
 #VocabAppMain.py
+from kivy.metrics import dp
+from kivy.uix.gridlayout import GridLayout
 from kivymd.app import MDApp
+from kivymd.uix.datatables import MDDataTable
+from kivymd.uix.fitimage import FitImage
 from kivymd.uix.screen import MDScreen
 from secure_password import hash_password
 from db_manager import database_handler
 from models import Users, Vocabulary, UserStats
+from kivy.lang import Builder
 
 global current_user
 current_user = None
+
 class LoginScreen(MDScreen):
     def login(self):
         print(f"Username: {self.ids.uname.text} Password: {self.ids.pwd.text}")
@@ -48,7 +54,7 @@ class RegisterScreen(MDScreen):
 class LandingScreen(MDScreen):
     def on_enter(self):
         global current_user
-        self.ids.welcome_banner.text = f"Welcome {current_user.username}"
+        self.ids.welcome_banner.text = f"こんにちは {current_user.username}"
     def logout(self):
         self.parent.current = "LoginScreen"
         current_user = None
@@ -56,16 +62,60 @@ class LandingScreen(MDScreen):
         self.parent.current = "AddVocabScreen"
 
 class ManageVocabScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        font_name = "Roboto"
+        self.data_table = MDDataTable(
+            size_hint=(0.9, 0.5),
+            pos_hint={"center_x": 0.5, "center_y": 0.5},
+            use_pagination=True,
+            check=True,
+            column_data=[
+                ("ID", 50),
+                ("Lesson", 40),
+                ("Part", 40),
+                ("Hiragana", 40, font_name),
+                ("Katakana", 40),
+                ("Definition", 40)
+            ],
+            row_data=[]
+        )
+        self.data_table.bind(on_row_press=self.on_row_press)
+        self.data_table.bind(on_check_press=self.on_check_press)
+        self.add_widget(self.data_table)
+
+    def on_pre_enter(self, *args):
+        self.load()
+
+    def on_row_press(self, table, row):
+        print(f"Row was pressed. Data is: {row.text}")
+
+    def on_check_press(self, table, current_row):
+        print(f"Row {current_row} was checked")
+
+    def load(self):
+        print("Trying to load all Tx...")
+        self.data_table.row_data.clear()
+        rows = VocabApp.db.get_vocab()
+        print(self.data_table.row_data)
+        for row in rows:
+            print(row)
+            print(row.id)
+            row = [str(row.id), str(row.lesson), str(row.part_of_lesson), row.hiragana, row.katakana, row.definition]
+            print(row)
+            if row not in self.data_table.row_data:
+                self.data_table.row_data.append(row)
+
+
+
+class PerVocabManageScreen(MDScreen):
     def add_vocab(self):
         pass
-
     def edit_vocab(self):
         pass
 
     def delete_vocab(self):
         pass
-
-
 
 class RandomVocabScreen(MDScreen):
     def random_vocab(self):

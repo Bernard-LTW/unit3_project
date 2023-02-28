@@ -49,8 +49,8 @@ class database_handler:
         else:
             return False
 
-    def get_vocab(self, user_id):
-        vocab = self.session.query(Vocabulary).filter_by(user_id=user_id).all()
+    def get_vocab(self):
+        vocab = self.session.query(Vocabulary).all()
         return vocab
 
 create_base()

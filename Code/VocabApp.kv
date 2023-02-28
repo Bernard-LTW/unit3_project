@@ -13,7 +13,14 @@ ScreenManager:
         name: "VocabChooserScreen"
     VocabCardScreen:
         name: "VocabCardScreen"
+    PerVocabManageScreen:
+        name: "PerVocabManageScreen"
+<JapaneseTextField@MDTextField>:
+    font_name: 'Japanese.ttc'
+    input_type: 'text'
 
+<H2> :
+    font_name: "Japanese.ttc"
 
 <LoginScreen>:
     FitImage:
@@ -26,6 +33,7 @@ ScreenManager:
         MDLabel:
             size_hint: 1,.1
             font_style:"H2"
+            font_name:"Japanese.ttc"
             text:"Login"
             halign:"center"
         MDTextField:
@@ -131,26 +139,32 @@ ScreenManager:
         size_hint: .6,.8
         pos_hint: {"center_x":.5, "center_y":.5}
         orientation:"vertical"
+        padding: 20
+        MDLabel:
+            id:app_name
+            size_hint: 1,.1
+            font_style:"H4"
+            font_name:"Japanese.ttc"
+            text:"日本語 Vocabulary App"
+            halign:"center"
 
         MDLabel:
             id: welcome_banner
             size_hint: 1,.1
-            font_style:"H2"
-            text:"Welcome"
-            halign:"center"
-        MDLabel:
-            id: welcome
-            size_hint: 1,.1
-            font_style:"H4"
-            text:"Welcome"
+            font_style:"H5"
+            font_name:"Japanese.ttc"
+            text:"-"
             halign:"center"
         MDBoxLayout:
             size_hint: 1,.7
             orientation:"vertical"
+            padding:20
             MDRaisedButton:
                 id : managevocab
                 text:"Manage Vocab"
                 size_hint: 1,.2
+                text_color: 0,0,0,1
+                font_size: 100
                 md_bg_color: "#a8dadc"
                 pos_hint: {"center_y":.5}
                 on_press:
@@ -160,6 +174,8 @@ ScreenManager:
                 id : randomvocab
                 text:"Random Vocab"
                 size_hint: 1,.2
+                text_color: 0,0,0,1
+                font_size: 100
                 md_bg_color: "#a8dadc"
                 pos_hint: {"center_y":.5}
                 on_press:
@@ -169,6 +185,8 @@ ScreenManager:
                 id : vocabchooser
                 text:"Choose Vocab"
                 size_hint: 1,.2
+                text_color: 0,0,0,1
+                font_size: 100
                 md_bg_color: "#a8dadc"
                 pos_hint: {"center_y":.5}
                 on_press:
@@ -176,6 +194,7 @@ ScreenManager:
                     root.manager.transition.direction = "left"
         MDBoxLayout:
             size_hint: 1,0.1
+            padding:20
             MDRaisedButton:
                 id : logout
                 text:"Logout"
@@ -183,3 +202,47 @@ ScreenManager:
                 pos_hint: {"center_x":.5}
                 md_bg_color: "#e63946"
                 on_press: root.logout()
+
+<ManageVocabScreen>:
+    MDRaisedButton:
+        id : back
+        text:"Back"
+        size_hint: .2,.1
+        pos_hint: {"center_x":.1 , "center_y":.95}
+        md_bg_color: "#e63946"
+        on_press:
+            root.manager.current = "LandingScreen"
+            root.manager.transition.direction = "left"
+    MDBoxLayout:
+        pos_hint: {"center_x":.5, "center_y":.2}
+        size_hint: 1,.1
+        MDBoxLayout:
+            size_hint: .5,1
+            MDRaisedButton:
+                id : addvocab
+                text:"Add Vocab"
+                size_hint: 1,1
+                md_bg_color: "#a8dadc"
+                on_press:
+                    root.manager.current = "PerVocabManageScreen"
+                    root.manager.transition.direction = "left"
+            MDRaisedButton:
+                id : editvocab
+                text:"Edit Vocab"
+                size_hint: 1,1
+                md_bg_color: "#a8dadc"
+                on_press:
+                    root.manager.current = "PerVocabManageScreen"
+                    root.manager.transition.direction = "left"
+            MDRaisedButton:
+                id : deletevocab
+                text:"Delete Vocab"
+                size_hint: 1,1
+                md_bg_color: "#a8dadc"
+                on_press:
+                    root.manager.current = "PerVocabManageScreen"
+                    root.manager.transition.direction = "left"
+
+
+
+
