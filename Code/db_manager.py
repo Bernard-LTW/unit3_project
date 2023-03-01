@@ -3,7 +3,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 from models import Users, Base, Vocabulary, UserStats
 from secure_password import check_password
-
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 
 def create_base():
     engine = create_engine('sqlite:///vocab_app.db')
@@ -50,8 +51,64 @@ class database_handler:
         vocab = self.session.query(Vocabulary).all()
         return vocab
 
+    def insert_vocab(self, lesson, part, hiragana, katakana, definition):
+        if self.session.query(Vocabulary).filter_by(hiragana=hiragana).first() is not None:
+            print("Vocab already exists")
+            return False
+        else:
+            new_vocab = Vocabulary(lesson=lesson, part_of_lesson=part, hiragana=hiragana, katakana=katakana, definition=definition)
+            self.session.add(new_vocab)
+            self.session.commit()
+            print("Vocab added")
+            return None
+
+    def update_vocab(self, lesson, part, hiragana, katakana, definition):
+        vocab = self.session.query(Vocabulary).filter_by(hiragana=hiragana).first()
+        vocab.lesson = lesson
+        vocab.part = part
+        vocab.hiragana = hiragana
+        vocab.katakana = katakana
+        vocab.definition = definition
+        self.session.commit()
+        return None
+
+    def delete_vocab(self, vocab_id):
+        vocab = self.session.query(Vocabulary).filter_by(id=vocab_id).first()
+        self.session.delete(vocab)
+        self.session.commit()
+        return None
+    def get_vocab_by_id(self,vocab_id):
+        if self.session.query(Vocabulary).filter_by(id=vocab_id).first() is None:
+            return None
+        else:
+           return self.session.query(Vocabulary).filter_by(id=vocab_id).first()
+
+    def get_vocab_by_lesson_and_part(self, lesson, part):
+        vocab = self.session.query(Vocabulary).filter_by(lesson=lesson, part_of_lesson=part).all()
+        return vocab
+
+    def update_user_stats(self, user_id, vocab_id, point_change):
+        user_stats = self.session.query(UserStats).filter_by(user_id=user_id, vocabulary_id=vocab_id).first()
+        print(f"User stats: {user_stats}")
+        if user_stats is None:
+            new_user_stats = UserStats(user_id=user_id, vocabulary_id=vocab_id, points=100)
+            new_user_stats.points += point_change
+            self.session.add(new_user_stats)
+            self.session.commit()
+        else:
+            user_stats.points += point_change
+            self.session.commit()
+        return None
+
+    def get_vocab_by_user_stats(self, user_id):
+    #get all vocab from userstats where user_id = user_id sort by points ascending
+        vocab = self.session.query(Vocabulary).join(UserStats).filter(UserStats.user_id == user_id).order_by(UserStats.points).all()
+        return vocab
+
+
 create_base()
 test = database_handler("vocab_app.db")
 print(test.check_user("haha@haha.com"))
+
 
 
