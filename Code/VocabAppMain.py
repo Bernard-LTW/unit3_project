@@ -93,10 +93,12 @@ class ManageVocabScreen(MDScreen):
     def on_pre_enter(self, *args):
         self.load()
 
-    def on_row_press(self, table, row):
+    @staticmethod
+    def on_row_press(table, row):
         print(f"Row was pressed. Data is: {row.text}")
 
-    def on_check_press(self, table, current_row):
+    @staticmethod
+    def on_check_press(table, current_row):
         print(f"Row {current_row} was checked")
 
     def load(self):
