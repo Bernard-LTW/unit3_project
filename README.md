@@ -42,8 +42,9 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Data Storage
 
+![](Assets/VocabApp_ER.jpeg)
 
-
+**Fig.2** *ER diagram of the Japanese Vocab Revision App Database*
 
 ## Wireframe
 
@@ -51,15 +52,15 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Record of Tasks
 
-| Task No | Planned Action                                   | Planned Outcome                                          | Time estimate | Target completion date | Criterion |
-| ------- | ------------------------------------------------ | -------------------------------------------------------- | ------------- | ---------------------- | --------- |
-| 1       | Planning: First Meeting with client              | Start collecting the context of the problem              | 6min          | Feb 7                  | A         |
-| 2       | Planning: Defining problem and proposed solution | Start on refining client's requirements and tools needed | 2hr           | Feb 15                 | A         |
-| 3       | Coding: Initializing codebase                    | To have the base environment of program ready for coding | 1hr           | Feb 20                 | B         |
-| 4       | Planning : Second Meeting with client            | Decided success criteria                                 | 5min          | Feb 21                 | A         |
-| 5       | Coding: Coding the main part of the program      | Finish coding the program                                | 5hr           | Mar 1                  | C         |
-| 6       | Creating System Diagram                          | To have system diagram finished                          | 20min         | Mar 2                  | B         |
-|         |                                                  |                                                          |               |                        |           |
+| Task No | Planned Action                                   | Planned Outcome                                              | Time estimate | Target completion date | Criterion |
+| ------- | ------------------------------------------------ | ------------------------------------------------------------ | ------------- | ---------------------- | --------- |
+| 1       | Planning: First Meeting with client              | Start collecting the context of the problem                  | 6min          | Feb 7                  | A         |
+| 2       | Planning: Defining problem and proposed solution | Start on refining client's requirements and tools needed     | 2hr           | Feb 15                 | A         |
+| 3       | Coding: Initializing codebase                    | To have the base environment of program ready for coding     | 1hr           | Feb 20                 | B         |
+| 4       | Planning : Second Meeting with client            | Decided success criteria                                     | 5min          | Feb 21                 | A         |
+| 5       | Coding: Coding the main part of the program      | Finish coding the program                                    | 5hr           | Mar 1                  | C         |
+| 6       | Creating System Diagrams                         | To have system diagram for application and database finished | 40min         | Mar 2                  | B         |
+|         |                                                  |                                                              |               |                        |           |
 
 ## Flow Diagrams
 
@@ -82,14 +83,15 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Existing Tools
 
-| Software/Development Tools | Coding Structure Tools  | Libraries  |
-| -------------------------- | ----------------------- | ---------- |
-| PyCharm                    | OOP Structures(Classes) | Kivymd.app |
-| Python                     | SQL requests            | Passlib    |
-| SQLite                     | Databases               | sqlalchemy |
-| KivyMD                     | Encryption              |            |
-|                            | For Loops               |            |
-|                            | If-then-else statements |            |
+| Software/Development Tools | Coding Structure Tools       | Libraries  |
+| -------------------------- | ---------------------------- | ---------- |
+| PyCharm                    | OOP Structures(Classes)      | Kivymd.app |
+| Python                     | SQL requests                 | Passlib    |
+| SQLite                     | Databases                    | sqlalchemy |
+| KivyMD                     | Encryption                   |            |
+| Github Copilot             | For Loops                    |            |
+| ChatGPT                    | If-then-else statements      |            |
+|                            | ORM(Object Relation Mapping) |            |
 
 ## List of techniques used
 
@@ -99,8 +101,7 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 #### Decomposition
 
-In computational thinking, decomposition refers to breaking a complex problem or system into parts that are easier to conceive,
-understand, program, and maintain.
+In computational thinking, decomposition refers to breaking a complex problem or system into parts that are easier to conceive, understand, program, and maintain.
 
 #### Pattern recognition, generalization and abstraction
 
