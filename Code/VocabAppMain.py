@@ -10,7 +10,6 @@ from models import Users, Vocabulary
 from secure_password import hash_password
 
 global current_user
-current_user = None
 global vocab_list
 vocab_list = []
 
@@ -31,7 +30,6 @@ class LoginScreen(MDScreen):
         else:
             print("Login failed")
 
-
 class RegisterScreen(MDScreen):
     def register(self):
         print(f"Username: {self.ids.uname.text} Email:{self.ids.email.text} Password: {self.ids.pwd.text}")
@@ -51,7 +49,6 @@ class RegisterScreen(MDScreen):
             db.insert_user(email, uname, pwd)
             db.close()
             self.parent.current = "LoginScreen"
-
 
 class LandingScreen(MDScreen):
     def on_enter(self):
@@ -305,14 +302,13 @@ class VocabCardScreen(MDScreen):
             self.next_vocab()
         except Exception as e:
             Logger.error(f"Error removing points: {e}")
-
-
 class VocabApp(MDApp):
     db = database_handler("vocab_app.db")
-
     def build(self):
         return
 
 
 boi = VocabApp()
 boi.run()
+
+

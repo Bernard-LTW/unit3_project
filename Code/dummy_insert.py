@@ -16,15 +16,9 @@ dummy_data = [
     {'lesson': 1, 'part_of_lesson': 5, 'katakana': 'オ', 'hiragana': 'お', 'definition': 'o'},
     # add more rows as needed
 ]
-
 # insert the dummy data into the Vocabulary table
 for data in dummy_data:
-    #data['katakana'] = data['katakana'].encode('utf-16')
-    #print(data['katakana'])
-    #data['hiragana'] = data['hiragana'].encode('utf-16')
-    #print(data['hiragana'])
     vocab = Vocabulary(**data)
     session.add(vocab)
-
 # commit the changes to the database
 session.commit()

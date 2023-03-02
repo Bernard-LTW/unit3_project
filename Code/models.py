@@ -35,4 +35,3 @@ class UserStats(Base):
 
 
 
-
