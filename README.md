@@ -36,7 +36,9 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## System Diagram
 
-![](Assets/VocabApp_SysDia.jpeg)
+![](Assets/VocabApp_SysDia2.jpeg)
+
+
 
 **Fig.1** *System diagram of the Japanese Vocab Revision App*
 
@@ -46,9 +48,13 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 **Fig.2** *ER diagram of the Japanese Vocab Revision App Database*
 
+## UML Diagram
+
+**Fig.3** *UML Diagram of the Japanese Vocab Revision App*
+
 ## Wireframe
 
-
+**Fig.4**  *Wireframe of the Japanese Vocab Revision App*
 
 ## Record of Tasks
 
@@ -64,13 +70,13 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Flow Diagrams
 
-### MVP Program
+#### Password Authentication
 
-*Fig.2* **Flow diagram for the MVP program.**
+#### Randomized Vocabulary Mode
 
-### Main Program
+#### Vocab Cards & Point System
 
-*Fig.3 **Flow diagram for the main program.**
+
 
 ## Test Plan
 
@@ -114,6 +120,8 @@ In computational thinking, decomposition refers to breaking a complex problem or
 ## Development
 
 #### OOP
+
+ORM
 
 #### MVP - Minimum Viable Product
 

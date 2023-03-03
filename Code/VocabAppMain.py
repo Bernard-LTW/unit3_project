@@ -30,6 +30,11 @@ class LoginScreen(MDScreen):
         else:
             print("Login failed")
 
+
+class MDAlertDialog:
+    pass
+
+
 class RegisterScreen(MDScreen):
     def register(self):
         print(f"Username: {self.ids.uname.text} Email:{self.ids.email.text} Password: {self.ids.pwd.text}")
@@ -37,17 +42,56 @@ class RegisterScreen(MDScreen):
         email = self.ids.email.text
         pwd = self.ids.pwd.text
         cpwd = self.ids.cpwd.text
+        # Regular expression pattern for email validation
+        email_pattern = r"[^@]+@[^@]+\.[^@]+"
+
+
+        # Validate the email format
+        if not re.match(email_pattern, email):
+            # Show an error message
+            self.ids.email.error = True
+            self.ids.email.helper_text = "Invalid email format"
+            self.ids.email.helper_text_mode = "on_error"
+            return
         if pwd != cpwd:
             print("Passwords do not match")
             self.ids.cpwd.error = True
             self.ids.cpwd.md_bg_color = "red"
         else:
+            if VocabApp.db.username_exists(uname) or VocabApp.db.email_exists(email):
+                # Show an error dialog
+                existsdialog = MDDialog(
+                    title="Error",
+                    text="Username or email already exists",
+                    size_hint=(0.8, 0.3),
+                    buttons=[
+                        MDFlatButton(
+                            text="OK",
+                            on_release=lambda x: existsdialog.dismiss()
+                        )
+                    ]
+                )
+                existsdialog.open()
+                return
             pwd = hash_password(pwd)
             self.ids.cpwd.error = False
             self.ids.cpwd.md_bg_color = "green"
             db = database_handler("vocab_app.db")
             db.insert_user(email, uname, pwd)
             db.close()
+            successdialog = MDDialog(
+                title="Success",
+                text="User registered successfully",
+                size_hint=(0.8, 0.3),
+                buttons=[
+                    MDFlatButton(
+                        text="OK",
+                        on_release=lambda x: successdialog.dismiss()
+                    )
+                ]
+            )
+            successdialog.open()
+
             self.parent.current = "LoginScreen"
 
 class LandingScreen(MDScreen):
@@ -121,6 +165,18 @@ class ManageVocabScreen(MDScreen):
                 vocab_id = int(row[0])
                 VocabApp.db.delete_vocab(vocab_id=vocab_id)
             self.load()
+            deletedialog = MDDialog(
+                title="Success",
+                text="Vocabulary deleted successfully",
+                size_hint=(0.8, 0.3),
+                buttons=[
+                    MDFlatButton(
+                        text="OK",
+                        on_release=lambda x: deletedialog.dismiss()
+                    )
+                ]
+            )
+            deletedialog.open()
         except Exception as e:
             Logger.error(f"Error deleting vocabulary: {e}")
 
@@ -176,6 +232,18 @@ class PerVocabManageScreen(MDScreen):
             else:
                 VocabApp.db.insert_vocab(lesson, part, hiragana, katakana, definition)
                 Logger.info("Vocabulary added successfully")
+                save_dialog = MDDialog(
+                    title="Success",
+                    text="Vocabulary added successfully",
+                    size_hint=(0.7, 0.3),
+                    buttons=[
+                        MDFlatButton(
+                            text="OK",
+                            on_release= lambda x: save_dialog.dismiss()
+                        )
+                    ]
+                )
+                save_dialog.open()
                 self.clear_fields()
             self.parent.current = "ManageVocabScreen"
         except Exception as e:
@@ -200,6 +268,18 @@ class PerVocabManageScreen(MDScreen):
         try:
             VocabApp.db.update_vocab(lesson, part, hiragana, katakana, definition)
             Logger.info("Vocabulary updated successfully")
+            update_success = MDDialog(
+                title="Success",
+                text="Vocabulary updated successfully",
+                size_hint=(0.7, 0.3),
+                buttons = [
+                    MDFlatButton(
+                        text="OK",
+                        on_release=lambda x: update_success.dismiss()
+                    )
+                ]
+            )
+            update_success.open()
             self.clear_fields()
             self.parent.current = "ManageVocabScreen"
             ManageVocabScreen.load(self.parent.get_screen("ManageVocabScreen"))

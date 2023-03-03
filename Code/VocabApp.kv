@@ -40,7 +40,7 @@ ScreenManager:
             halign:"center"
         MDTextField:
             id: uname
-            hint_text:"Enter username or email"
+            hint_text:"Enter username"
             icon_right:"account"
             size_hint: .8,.1
             pos_hint: {"center_x":.5}
@@ -132,7 +132,6 @@ ScreenManager:
                 pos_hint: {"center_y":.5}
                 on_press:
                     root.register()
-                    root.manager.current = "LoginScreen"
 
 <LandingScreen>:
     FitImage:
@@ -427,6 +426,8 @@ ScreenManager:
                 md_bg_color: "#a8dadc"
                 on_press:
                     root.choose_vocab()
+
+
 
 <VocabCardScreen>:
     FitImage:

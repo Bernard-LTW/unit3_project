@@ -111,7 +111,20 @@ class database_handler:
             UserStats.points).all()
         return vocab
 
+    def username_exists(self, username):
+        if self.session.query(Users).filter_by(username=username).first() is None:
+            return False
+        else:
+            return True
+
+    def email_exists(self, email):
+        if self.session.query(Users).filter_by(email=email).first() is None:
+            return False
+        else:
+            return True
 
 create_base()
 test = database_handler("vocab_app.db")
 print(test.check_user("haha@haha.com"))
+
+print(test.get_unique_lesson_parts())
