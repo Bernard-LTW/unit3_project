@@ -1,6 +1,9 @@
 # VocabAppMain.py
+import re
+
 from kivy.logger import Logger
 from kivymd.app import MDApp
+from kivymd.uix.button import MDFlatButton
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.screen import MDScreen
@@ -44,7 +47,6 @@ class RegisterScreen(MDScreen):
         cpwd = self.ids.cpwd.text
         # Regular expression pattern for email validation
         email_pattern = r"[^@]+@[^@]+\.[^@]+"
-
 
         # Validate the email format
         if not re.match(email_pattern, email):
@@ -93,6 +95,7 @@ class RegisterScreen(MDScreen):
             successdialog.open()
 
             self.parent.current = "LoginScreen"
+
 
 class LandingScreen(MDScreen):
     def on_enter(self):
@@ -239,7 +242,7 @@ class PerVocabManageScreen(MDScreen):
                     buttons=[
                         MDFlatButton(
                             text="OK",
-                            on_release= lambda x: save_dialog.dismiss()
+                            on_release=lambda x: save_dialog.dismiss()
                         )
                     ]
                 )
@@ -272,7 +275,7 @@ class PerVocabManageScreen(MDScreen):
                 title="Success",
                 text="Vocabulary updated successfully",
                 size_hint=(0.7, 0.3),
-                buttons = [
+                buttons=[
                     MDFlatButton(
                         text="OK",
                         on_release=lambda x: update_success.dismiss()
@@ -307,6 +310,7 @@ class RandomVocabScreen(MDScreen):
         except Exception as e:
             Logger.error(f"Error choosing random vocabulary: {e}")
 
+
 class VocabChooserScreen(MDScreen):
     def clear_fields(self):
         self.ids.selected_lesson.text = ""
@@ -339,7 +343,7 @@ class VocabCardScreen(MDScreen):
         print("Next vocab")
         global count
         global vocab_list
-        if count > len(vocab_list)-1:
+        if count > len(vocab_list) - 1:
             self.ids.vocab_description.text = "You have reached the end of the list"
             self.ids.katakana_label.text = ""
             self.ids.hiragana_label.text = ""
@@ -347,8 +351,9 @@ class VocabCardScreen(MDScreen):
             self.parent.get_screen("VocabCardScreen").ids.hiragana_label.text = vocab_list[count][0]
             self.parent.get_screen("VocabCardScreen").ids.katakana_label.text = vocab_list[count][1]
             self.parent.get_screen("VocabCardScreen").ids.vocab_description.text = f"Definition: {vocab_list[count][2]}"
+
     def toggle_japanese(self):
-        #print(self.ids.hiragana_label.color)
+        # print(self.ids.hiragana_label.color)
         if self.ids.hiragana_label.color == [1, 1, 1, 1]:
             self.ids.show_japanese.text = "Hide Japanese"
             self.ids.hiragana_label.color = [0, 0, 0, 1]
@@ -357,6 +362,7 @@ class VocabCardScreen(MDScreen):
             self.ids.show_japanese.text = "Show Japanese"
             self.ids.hiragana_label.color = [1, 1, 1, 1]
             self.ids.katakana_label.color = [1, 1, 1, 1]
+
     def add_points(self):
         global count
         global current_user
@@ -382,13 +388,14 @@ class VocabCardScreen(MDScreen):
             self.next_vocab()
         except Exception as e:
             Logger.error(f"Error removing points: {e}")
+
+
 class VocabApp(MDApp):
     db = database_handler("vocab_app.db")
+
     def build(self):
         return
 
 
 boi = VocabApp()
 boi.run()
-
-

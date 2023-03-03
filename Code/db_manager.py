@@ -126,5 +126,3 @@ class database_handler:
 create_base()
 test = database_handler("vocab_app.db")
 print(test.check_user("haha@haha.com"))
-
-print(test.get_unique_lesson_parts())
