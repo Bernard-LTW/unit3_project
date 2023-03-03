@@ -56,6 +56,8 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Wireframe
 
+![](Assets/VocabApp_Wireframe.jpeg)
+
 **Fig.4**  *Wireframe of the Japanese Vocab Revision App*
 
 ## Record of Tasks
@@ -68,17 +70,28 @@ I will design a Python application running on the KivyMD GUI framework which sto
 | 4       | Planning : Second Meeting with client            | Decided success criteria                                     | 5min          | Feb 21                 | A         |
 | 5       | Coding: Coding the main part of the program      | Finish coding the program                                    | 5hr           | Mar 1                  | C         |
 | 6       | Creating System Diagrams                         | To have system diagram for application and database finished | 40min         | Mar 2                  | B         |
+| 7       | Coding: Beautifying Graphical User Interface     | To make the interface more user-friendly and easily understandable | 2hr           | Mar 3                  | C         |
 |         |                                                  |                                                              |               |                        |           |
 
 ## Flow Diagrams
 
 #### Password Authentication
 
-#### Randomized Vocabulary Mode
+![](Assets/VocabApp_PasswordAuthFlow.jpg)
+
+**Fig.5**  *Flow diagram of Password Authentication system*
 
 #### Vocab Cards & Point System
 
+![](Assets/VocabApp_PointsFlow.jpg)
 
+**Fig.6** *Flow diagram of Point System*
+
+#### Vocab Entry Editing
+
+![](Assets/VocabApp_EditFlow.jpg)
+
+**Fig.7**  *Flow diagram of Vocab Editing function*
 
 ## Test Plan
 
@@ -123,12 +136,7 @@ In computational thinking, decomposition refers to breaking a complex problem or
 
 #### OOP
 
-ORM
-
-#### MVP - Minimum Viable Product
-
-In order to validate our concept of creation, we created a MVP as a prototype to make sure our concept is reliable and
-achievable. 
+#### ORM
 
 # Criteria D: Functionality
 
@@ -139,6 +147,18 @@ achievable.
 *To be done
 
 # Appendix
+
+### First meeting with client
+
+![](Assets/MeetingNotes1.jpg)
+
+**Fig.?** *Rough notes from first meeting with client, includes basic ideas behind client's app*
+
+### Success Criteria Meeting(Second Meeting)
+
+![](Assets/MeetingNotes2.jpg)
+
+**Fig.?** *Rough notes from second meeting with client, includes details of success criteria*
 
 
 
