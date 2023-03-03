@@ -33,11 +33,6 @@ class LoginScreen(MDScreen):
         else:
             print("Login failed")
 
-
-class MDAlertDialog:
-    pass
-
-
 class RegisterScreen(MDScreen):
     def register(self):
         print(f"Username: {self.ids.uname.text} Email:{self.ids.email.text} Password: {self.ids.pwd.text}")
@@ -105,11 +100,6 @@ class LandingScreen(MDScreen):
     def logout(self):
         self.parent.current = "LoginScreen"
         current_user = None
-
-    def add_vocab(self):
-        self.parent.current = "AddVocabScreen"
-
-
 class ManageVocabScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -392,7 +382,6 @@ class VocabCardScreen(MDScreen):
 
 class VocabApp(MDApp):
     db = database_handler("vocab_app.db")
-
     def build(self):
         return
 

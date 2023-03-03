@@ -46,11 +46,13 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ![](Assets/VocabApp_ER.jpeg)
 
-**Fig.2** *ER diagram of the Japanese Vocab Revision App Database*
+**Fig.2** *ER diagram of the Japanese Vocab Revision App Database*. This diagram depicts the database structure used to store the data for this application and how the relationships between table link up the database.
 
 ## UML Diagram
 
-**Fig.3** *UML Diagram of the Japanese Vocab Revision App*
+![](Assets/VocabApp_UML.jpeg)
+
+**Fig.3** *UML Diagram of the Japanese Vocab Revision App*. This diagram depicts the classes of the application.
 
 ## Wireframe
 
