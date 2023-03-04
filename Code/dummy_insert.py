@@ -14,7 +14,6 @@ dummy_data = [
     {'lesson': 1, 'part_of_lesson': 3, 'katakana': 'ウ', 'hiragana': 'う', 'definition': 'u'},
     {'lesson': 1, 'part_of_lesson': 4, 'katakana': 'エ', 'hiragana': 'え', 'definition': 'e'},
     {'lesson': 1, 'part_of_lesson': 5, 'katakana': 'オ', 'hiragana': 'お', 'definition': 'o'},
-    # add more rows as needed
 ]
 # insert the dummy data into the Vocabulary table
 for data in dummy_data:

@@ -243,11 +243,10 @@ class PerVocabManageScreen(MDScreen):
             Logger.error(f"Error adding vocabulary: {e}")
 
     def clear_fields(self):
-        self.ids.selected_lesson.text = ""
-        self.ids.selected_part.text = ""
-        self.ids.selected_hiragana.text = ""
-        self.ids.selected_katakana.text = ""
-        self.ids.selected_english.text = ""
+        fields_to_clear = ['selected_lesson', 'selected_part', 'selected_hiragana', 'selected_katakana',
+                           'selected_english']
+        for field in fields_to_clear:
+            self.ids[field].text = ""
         self.ids.selected_save.text = "Save"
         self.ids.selected_save.on_press = self.add_vocab
 
@@ -359,6 +358,7 @@ class VocabCardScreen(MDScreen):
         try:
             user_id = current_user.id
             id = vocab_list[count][3]
+            VocabApp.db.update_user_stats(user_id, id, 1)
             VocabApp.db.update_user_stats(user_id, id, 1)
             Logger.info("Points removed successfully")
             count += 1

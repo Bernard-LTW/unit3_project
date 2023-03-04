@@ -116,25 +116,126 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## List of techniques used
 
-1. 
+1. Object Oriented Programming(OOP)
+1. Object Relation Mapping(ORM):SQLAlchemy
+1. KivyMD Library
+1. For loops
+1. if statements
+1. Password Hashing
+1. Interacting with Databases
+1. Arrays and Lists
+1. Text Formatting
 
 ## Computational Thinking
 
 #### Decomposition
 
-In computational thinking, decomposition refers to breaking a complex problem or system into parts that are easier to conceive, understand, program, and maintain.
+In computational thinking, decomposition refers to breaking a complex problem or system into parts that are easier to conceive, understand, program, and maintain. In this project, one key thing was  the point system to store statistics and the user's performance in the database. As this require multiple steps, I broke down the whole action in the into collecting user and vocabulary information, calling back to another function inside the database handler and shifting to the next card in the GUI. Here's a snippet of the the function for adding points.
+
+##### Main Function
+
+```python
+def add_points(self):
+      global count
+      global current_user
+      try:
+        #Collecting user infomation and id of the vocabulary
+          user_id = current_user.id
+          id = vocab_list[count][3]
+         #Calling back to the database handler to update the entry
+          VocabApp.db.update_user_stats(user_id, id, 1)
+          #Log the action
+          Logger.info("Points removed successfully")
+          #Shifting to the next vocabulary
+          count += 1
+          self.next_vocab()
+      except Exception as e:
+        #Error Catching
+          Logger.error(f"Error removing points: {e}")
+```
+
+##### Database Handler
+
+```python
+def update_user_stats(self, user_id, vocab_id, point_change):
+  	#Queries database for entry specific to the user and the vocabulary
+    user_stats = self.session.query(UserStats).filter_by(user_id=user_id, vocabulary_id=vocab_id).first()
+    if user_stats is None:
+      	#If none is found, a new entry is created automatically with base points of 100
+        new_user_stats = UserStats(user_id=user_id, vocabulary_id=vocab_id, points=100)
+        #Calculate new points according to the input into the function
+        new_user_stats.points += point_change
+        #Commit changes to the database
+        self.session.add(new_user_stats)
+        self.session.commit()
+    else:
+      	#If existing entry is found, new points are calculated and committed to the database
+        user_stats.points += point_change
+        self.session.commit()
+    return None
+```
 
 #### Pattern recognition, generalization and abstraction
 
+After a user hits the back button on a screen, the text fields on the previous screen still stays in the text fields. So the next time when the user opens that specific screen again, they would see that inputs from last time still there. To fix this problem, I implemented a function to clear out all text fields on one screen automatically. Here's the code:
 
+```python
+def clear_fields(self):
+    self.ids.selected_lesson.text = ""
+    self.ids.selected_part.text = ""
+    self.ids.selected_hiragana.text = ""
+    self.ids.selected_katakana.text = ""
+    self.ids.selected_english.text = ""
+    self.ids.selected_save.text = "Save"
+    self.ids.selected_save.on_press = self.add_vocab
+```
+
+As you can see this code is very repetitive. Thus I decided to use a for loop over a list to interate over each text field until they're all empty.
+
+```python
+  def clear_fields(self):
+        fields_to_clear = ['selected_lesson', 'selected_part', 'selected_hiragana', 'selected_katakana',
+                           'selected_english']
+        for field in fields_to_clear:
+            self.ids[field].text = ""
+        self.ids.selected_save.text = "Save"
+        self.ids.selected_save.on_press = self.add_vocab
+```
+
+In the code above, instead of manually setting each field to an empty string, I'm using a loop to iterate through a list of field names and set each one to an empty string. This would make the code more concise and easier to modify if you ever need to add or remove fields.
 
 #### Algorithms
+
+An algorithm is a step-by-step procedure for solving a problem or performing a task. One action requiring constant usage is the function for inserting vocabulary into the database. The function takes in several inputs (lesson, part, hiragana, katakana, and definition) and performs a series of steps to insert a new vocabulary into the database. The steps include checking if the vocabulary already exists in the database, creating a new Vocabulary object, adding it to the database session, and committing the changes. Here's a snippet of the code:
+
+```python
+  def insert_vocab(self, lesson, part, hiragana, katakana, definition):
+    #Queries database for if the vocabulary exisit rather than first(), saves on time when table has multiple records
+      exists = self.session.query(Vocabulary).filter_by(hiragana=hiragana).exists()
+      #Checks if vocabulary exists already
+      if exists:
+          print("Vocab already exists")
+          return False
+      else:
+        #Create a new vocabulary object
+          new_vocab = Vocabulary(lesson=lesson, part_of_lesson=part, hiragana=hiragana, katakana=katakana,
+                                 definition=definition)
+          self.session.add(new_vocab)
+          #Commiting changes
+          self.session.commit()
+          print("Vocab added")
+          return None
+```
 
 
 
 ## Development
 
-#### OOP
+#### Object Oriented Programming
+
+Object Oriented Programming(OOP), is a programming paradigm that focuses on creating objects that can contain both data and behavior. In OOP, objects are instances of classes, which define the properties and methods that the objects will have. The main advantages of OOP include Modularity, Reusability, Encapsulation, Abstraction and Polymorphism.
+
+
 
 #### ORM
 
