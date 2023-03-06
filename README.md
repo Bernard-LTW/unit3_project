@@ -231,13 +231,103 @@ An algorithm is a step-by-step procedure for solving a problem or performing a t
 
 ## Development
 
-#### Object Oriented Programming
+### Object Oriented Programming
 
-Object Oriented Programming(OOP), is a programming paradigm that focuses on creating objects that can contain both data and behavior. In OOP, objects are instances of classes, which define the properties and methods that the objects will have. The main advantages of OOP include Modularity, Reusability, Encapsulation, Abstraction and Polymorphism.
+Object Oriented Programming(OOP), is a programming paradigm that focuses on creating objects that can contain both data and behavior. In OOP, objects are instances of classes, which define the properties and methods that the objects will have. The main advantages of OOP include Modularity, Reusability, Encapsulation, Abstraction and Polymorphism. The whole vocabulary app is constructed using OOP to make it more simple to debug and for future developers to add/change features. Here's a snippet of how OOP was used to organize the code:
+
+```python
+class PerVocabManageScreen(MDScreen):
+    def __init__(self, **kwargs):
+      #Code omitted for demonstrative reasons
+    def on_pre_enter(self, *args):
+      #Code omitted for demonstrative reasons
+    def add_vocab(self):
+			#Code omitted for demonstrative reasons
+    def clear_fields(self):
+			#Code omitted for demonstrative reasons
+    def save_changes(self):
+       #Code omitted for demonstrative reasons 
+```
+
+As seen above, each screen has its own class and each specific action is housed under a function so everything is very clear and easy-to-understand.
+
+### ORM
+
+Object Relation Mapping(ORM), is a programming technique that allows developers to interact with a relational database using an object-oriented programming paradigm. In traditional programming with relational databases, developers use SQL statements to interact with the database. This involves writing SQL code to retrieve, update or delete records in the database. However, with ORM, developers can interact with the database using an object-oriented approach, which is more intuitive and easier to work with. ORM frameworks provide a layer of abstraction between the application and the database. They map database tables to classes in the application, and map columns to properties of those classes. This allows developers to work with objects in their code, rather than having to write SQL code to interact with the database. Here's a snippet of code to show the difference with and without ORM:
+
+```sql
+SELECT * FROM users WHERE username = "Bernard"
+```
+
+This is a normal SQL statement that can be executed in python throught running a query with the sqlite3 library. This is a language with a low level of abstration.
+
+```python
+db.session.query(Users).filter_by(username="Bernard").first()
+```
+
+This is the same query done through ORM and a library called SQLAlchemy. SQLAlchemy is a popular open-source ORM framework for Python that provides a set of tools for working with relational databases using Python code. It was first released in 2006 and has since become a widely used tool in the Python community for interacting with databases. SQLAlchemy provides a high-level API for working with databases, allowing developers to interact with databases using Python classes and objects rather than SQL statements. Here's an example of how tables are created in SQLAlchemy with ORM:
+
+```python
+class Vocabulary(Base):
+    __tablename__ = 'vocabulary'
+    id = Column(Integer, primary_key=True)
+    lesson = Column(Integer, nullable=False)
+    part_of_lesson = Column(Integer, nullable=False)
+    katakana = Column(String, nullable=False)
+    hiragana = Column(String, nullable=False)
+    definition = Column(String, nullable=False)
+    stats = relationship("UserStats", back_populates="vocabulary", order_by="UserStats.id")
+```
+
+### Code Organisation
+
+When dealing with a complex program, especially ones with a graphical user interfaces, it is a good practice to sepearate the front-end and back-end development. That can make finding code easier and let you be able to group frequently used functions together instead of writing repetitive code over and over which can make debugging a lot harder. In my program, I chose to seperate my code into four parts : the KV file, the python program that interacts with the UI elements, a database handler and a models file to define the table structures.
+
+![](Assets/VocabApp_CodeStruct.jpg)
+
+**Fig.8**  *Diagram showing how code is organised in the app*
+
+As seen above, my code is separated into four parts. That makes debugging and changing features in the future easier and more straightforward.
+
+### Inserting Data
+
+Throughout the development process of the app, uncountable times of testing was done to make sure that the code functions as per my client's request and one of the main areas I tested was the database access. I had to constantly insert data into the database and try to interact with them inside the GUI. As the inserting of the same data was very time consuming and repetitive, I decided to write a small program in python which inserts dummy data into the database for testing. Here's the code:
+
+```python
+# create an engine and session
+engine = create_engine('sqlite:///vocab_app.db', echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
+# create some dummy data for the Vocabulary table
+dummy_data = [
+    {'lesson': 1, 'part_of_lesson': 1, 'katakana': 'ア', 'hiragana': 'あ', 'definition': 'a'},
+    {'lesson': 1, 'part_of_lesson': 2, 'katakana': 'イ', 'hiragana': 'い', 'definition': 'i'},
+    {'lesson': 1, 'part_of_lesson': 3, 'katakana': 'ウ', 'hiragana': 'う', 'definition': 'u'},
+    {'lesson': 1, 'part_of_lesson': 4, 'katakana': 'エ', 'hiragana': 'え', 'definition': 'e'},
+    {'lesson': 1, 'part_of_lesson': 5, 'katakana': 'オ', 'hiragana': 'お', 'definition': 'o'},
+]
+# insert the dummy data into the Vocabulary table
+for data in dummy_data:
+    vocab = Vocabulary(**data)
+    session.add(vocab)
+# commit the changes to the database
+session.commit()
+
+```
+
+### MDTextField / JapaneseTextField
+
+Throughout the whole program, an essential element of the graphical user interface was to allow my client to input text into the program
+
+### MDDialog
+
+### MDRaisedButton
+
+### Text Formatting in MDDataTable
+
+### Data Validation for emails
 
 
-
-#### ORM
 
 # Criteria D: Functionality
 

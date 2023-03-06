@@ -165,7 +165,7 @@ class ManageVocabScreen(MDScreen):
                 buttons=[
                     MDFlatButton(
                         text="OK",
-                        on_release=lambda x: deletedialog.dismiss()
+                        on_press=lambda x: deletedialog.dismiss()
                     )
                 ]
             )
