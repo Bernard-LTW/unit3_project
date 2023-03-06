@@ -315,19 +315,180 @@ session.commit()
 
 ```
 
+### Point System
+
+One key feature that my client requested was a system to keep track of learning progress of the user. After weighing multiple scoring/statistics systems, I decided to use a system where 100 is the base score per user per vocabulary and points are added/deducted based on the user's feedback on the Vocabulary Cards. To store this data, I created a table that has relations with the `users` table and the `vocabulary` table to make referencing easier and functions in the `database_handler` to change the score accordingly.
+
+#### Table Structure
+
+```python
+class UserStats(Base):
+    __tablename__ = 'user_stats'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    vocabulary_id = Column(Integer, ForeignKey('vocabulary.id'))
+    points = Column(Integer, nullable=False, default=100)
+    # One-to-many relationship with users
+    user = relationship("Users", back_populates="user_stats")
+    # One-to-many relationship with vocabulary
+    Users.user_stats = relationship("UserStats", order_by=id, back_populates="user")
+    # Many-to-one relationship with Vocabulary
+    vocabulary = relationship("Vocabulary", back_populates="stats")
+```
+
+#### Database Handler
+
+```python
+def update_user_stats(self, user_id, vocab_id, point_change):
+  user_stats = self.session.query(UserStats).filter_by(user_id=user_id, vocabulary_id=vocab_id).first()
+  print(f"User stats: {user_stats}")
+  if user_stats is None:
+      #Creates base statistics for entries that don't exists
+      new_user_stats = UserStats(user_id=user_id, vocabulary_id=vocab_id, points=100)
+      new_user_stats.points += point_change
+      self.session.add(new_user_stats)
+      self.session.commit()
+  else:
+    	#Updates entry
+      user_stats.points += point_change
+      self.session.commit()
+  return None
+```
+
+### Randomized Vocabulary Mode
+
+Also according to my client's request is the ability for the application to choose the vocabulary that the user's is relatively weaker at for more revision. To acheive this, I built a function in `database_handler` to retrieve the user's statistics and order the vocabulary with the lowest points to show first.
+
+```python
+def get_vocab_by_user_stats(self, user_id):
+    # get all vocabs from user stats where user_id = user_id sort by points ascending
+    vocab = self.session.query(Vocabulary).join(UserStats).filter(UserStats.user_id == user_id).order_by(
+        UserStats.points).all()
+    return vocab
+```
+
+
+
 ### MDTextField / JapaneseTextField
 
-Throughout the whole program, an essential element of the graphical user interface was to allow my client to input text into the program
+```kv
+<JapaneseTextField@MDTextField>:
+    font_name: 'Japanese.ttc'
+    input_type: 'text'
+
+JapaneseTextField:
+            id: selected_hiragana
+            size_hint: .8,1
+            pos_hint: {"center_x":.5}
+            hint_text:"Hiragana"
+            helper_text: "Enter Hiragana of vocab"
+            helper_text_mode: "on_error"
+```
+
+Throughout the whole program, an essential element of the graphical user interface was to allow my client to input text into the program. This is an example of the text fields used to input Japanese into the app. Because KivyMD does not support Japanese characters, I had to use a specific font for the text field. As this would cause very repetitve code having to redefine the font file. I created a specific object  ```<JapaneseTextField@MDTextField>``` that lets me define the font for the text field only once.
 
 ### MDDialog
 
-### MDRaisedButton
+```.kv
+successdialog = MDDialog(
+                title="Success",
+                text="User registered successfully",
+                size_hint=(0.8, 0.3),
+                buttons=[
+                    MDFlatButton(
+                        text="OK",
+                        on_release=lambda x: successdialog.dismiss()
+                    )
+                ]
+            )
+            successdialog.open()
+```
+
+This is an example of ```MDDialog``` used in my code to indicate to the user that an internal action was completed, becauase otherwise the program would be not intuitive as the user would have no way to tell if an action is completed properly. With the ```MDDialog``` implemented, the user is able get real-time feedback on if the program is performing an action under the hood.
 
 ### Text Formatting in MDDataTable
 
-### Data Validation for emails
+```python
+for row in rows:
+    temp_hiragana = f"[font=Japanese.ttc]{row.hiragana}[/font]"
+    temp_katakana = f"[font=Japanese.ttc]{row.katakana}[/font]"
+    row = [str(row.id), str(row.lesson), str(row.part_of_lesson), temp_hiragana, temp_katakana,
+           row.definition]
+    if row not in self.data_table.row_data:
+        self.data_table.row_data.append(row)
+```
+
+Above is the code to process the Japanese characters from the database before they get shown on the ```MDDataTable```. This is becuause if a font that aupports Japanese characters is applied, it wouldn't include the Kivy-specific icons and assets(e.g: checkboxes and page-turning buttons) needed to render the table. However, the Kivy-specfic font that includes all the icons and assets required by Kivy would not support Japanese characters. Thus, I decided to format the Japanese text with specific headers and footers to tell Kivy to render the specific Japanese characters with that font.
+
+### Data Validation for email addresses
+
+To make sure the email addresses are actually usable and contactable, I decided to validate the email addresses format before inserting them into the database. To implement this policy, I decided to use the `re` library in python to validate if the user inputted a valid email address. I first defined the pattern which for an email, is `r"[^@]+@[^@]+\.[^@]+"`, I then used the `re.match()` function to check if the inputted text matches the previously defined format. If the pre-defined format is not matched, it would show an error and prompt the user to type in their email address again.  Here's the code:
+
+```python
+# Regular expression pattern for email validation
+email_pattern = r"[^@]+@[^@]+\.[^@]+"
+
+# Validate the email format
+if not re.match(email_pattern, email):
+    # Show an error message
+    self.ids.email.error = True
+    self.ids.email.helper_text = "Invalid email format"
+    self.ids.email.helper_text_mode = "on_error"
+```
 
 
+
+### MDFillRoundFlatIconButton
+
+`MDFillRoundFlatIconButton` is one of the many buttons styles available in Kivy. I started out using `MDRaisedButton`  for everything, but the further into the coding process, I realized that there are a lot more button styles that can make my application more intuitive. I'm using this type of button in my login screen.
+
+```kv
+MDFillRoundFlatIconButton:
+    id: login_button
+    text: "Login"
+    icon: "login"
+    pos_hint: {"center_x": 0.5}
+    on_release: root.login()
+    md_bg_color: app.theme_cls.primary_color
+    size_hint_x: 0.8
+    disabled: not uname.text or not pwd.text
+    disabled_color: app.theme_cls.disabled_hint_text_color
+    elevation_normal: 12 if uname.text and pwd.text else 0
+    _md_bg_color_disabled: app.theme_cls.disabled_hint_text_color
+    _md_bg_color_active: app.theme_cls.primary_light
+```
+
+As seen in the code above, the button is disabled if the `uname` or `pwd` input fields are empty, and its background color is set to the application's theme color for disabled text. When clicked, it calls the `login()` method of the widget's root object. The button has a shadow of 12 pixels when the `uname` and `pwd` input fields have text, and its background color changes to a lighter shade of the primary color defined in the application's theme when pressed.
+
+### MDFloatingActionButton
+
+`MDFloatingActionButton` is one of the other many button styles in KivyMD. This type of button include an icon as its main focus. It can replace text with icons that represent self-explanitory functions, not to mention they are more intuitive and less graphic heavy on the GUI. Thus, I chose to use this button on the Home Screen of the application. Here's a snippet of code showing the logout button:
+
+```kv
+MDFloatingActionButton:
+  id: logout
+  icon: "logout"
+  text: "Logout"
+  halign:"right"
+  md_bg_color: app.theme_cls.accent_color
+  text_color: app.theme_cls.text_color
+  pos_hint: {"center_x": .5, "center_y": .5}
+  on_press:
+      root.logout()
+```
+
+### Color Theme
+
+As per my client's request, he requires a unified color theme to the whole application. To acheive this, instead of manually keeping track of which UI element uses which color, I defined a color scheme on the top of my Kivy file and just call back to this color theme everytime I need to refer to the colors.
+
+```kv
+# Define custom color scheme
+<CustomTheme>:
+    primary_palette: "Blue"
+    accent_palette: "Green"
+    theme_style: "Light"
+    primary_hue: "500"
+```
 
 # Criteria D: Functionality
 

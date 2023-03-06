@@ -27,8 +27,11 @@ class UserStats(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     vocabulary_id = Column(Integer, ForeignKey('vocabulary.id'))
     points = Column(Integer, nullable=False, default=100)
+    # One-to-many relationship with users
     user = relationship("Users", back_populates="user_stats")
+    # One-to-many relationship with vocabulary
     Users.user_stats = relationship("UserStats", order_by=id, back_populates="user")
+    # Many-to-one relationship with Vocabulary
     vocabulary = relationship("Vocabulary", back_populates="stats")
 
 
