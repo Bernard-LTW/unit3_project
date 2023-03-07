@@ -643,13 +643,13 @@ and just call back to this color theme every I need to refer to the colors.
 
 ![](Assets/MeetingNotes1.jpg)
 
-**Fig.?** *Rough notes from first meeting with client, includes basic ideas behind client's app*
+**Fig.9** *Rough notes from first meeting with client, includes basic ideas behind client's app*
 
 ### Success Criteria Meeting(Second Meeting)
 
 ![](Assets/MeetingNotes2.jpg)
 
-**Fig.?** *Rough notes from second meeting with the client, includes details of success criteria*
+**Fig.10** *Rough notes from second meeting with the client, includes details of success criteria*
 
 
 
