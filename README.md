@@ -1,6 +1,6 @@
 ![](Assets/DALLE.png)[^1]
 
-[^1]"a person studying in a classroom on a table in the form of pixel art" by DALL E 2, Open AI, Accessed 7th March 2023
+[^1]: "a person studying in a classroom on a table in the form of pixel art" by DALL E 2, Open AI, Accessed 7th March 2023
 
 # Unit 3 Project: Japanese Vocab Revision App
 
