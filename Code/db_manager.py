@@ -56,7 +56,7 @@ class database_handler:
 
     def insert_vocab(self, lesson, part, hiragana, katakana, definition):
         exists = self.session.query(Vocabulary).filter_by(hiragana=hiragana).exists()
-        if exists:
+        if exists is True:
             print("Vocab already exists")
             return False
         else:

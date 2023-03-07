@@ -635,7 +635,7 @@ and just call back to this color theme every I need to refer to the colors.
 
 ## Demonstration Video
 
-*To be done
+[Click here for the Video](https://drive.google.com/file/d/1itqrEy7QBwmW7Ril9mgh4pWVQhMVW6aM/view?usp=share_link)
 
 # Appendix
 

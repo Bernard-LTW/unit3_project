@@ -1,20 +1,16 @@
 # VocabAppMain.py
 import re
-
 from kivy.logger import Logger
 from kivymd.app import MDApp
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.screen import MDScreen
-
 from db_manager import database_handler
 from models import Users, Vocabulary
 from secure_password import hash_password
-
 global current_user
 global vocab_list
-vocab_list = []
 
 
 class LoginScreen(MDScreen):
@@ -31,6 +27,21 @@ class LoginScreen(MDScreen):
             self.ids.uname.text = ""
             self.ids.pwd.text = ""
         else:
+            Logger.info("Login failed")
+            self.ids.uname.text = ""
+            self.ids.pwd.text = ""
+            dialog = MDDialog(
+                title="Error",
+                text="Login failed",
+                size_hint=(0.8, 0.3),
+                buttons=[
+                    MDFlatButton(
+                        text="OK",
+                        on_release=lambda x: dialog.dismiss()
+                    )
+                ]
+            )
+            dialog.open()
             print("Login failed")
 
 class RegisterScreen(MDScreen):
@@ -42,7 +53,6 @@ class RegisterScreen(MDScreen):
         cpwd = self.ids.cpwd.text
         # Regular expression pattern for email validation
         email_pattern = r"[^@]+@[^@]+\.[^@]+"
-
         # Validate the email format
         if not re.match(email_pattern, email):
             # Show an error message
@@ -220,24 +230,21 @@ class PerVocabManageScreen(MDScreen):
         definition = self.ids.selected_english.text
 
         try:
-            if VocabApp.db.session.query(Vocabulary).filter_by(hiragana=hiragana).first() is not None:
-                self.dialog.open()
-            else:
-                VocabApp.db.insert_vocab(lesson, part, hiragana, katakana, definition)
-                Logger.info("Vocabulary added successfully")
-                save_dialog = MDDialog(
-                    title="Success",
-                    text="Vocabulary added successfully",
-                    size_hint=(0.7, 0.3),
-                    buttons=[
-                        MDFlatButton(
-                            text="OK",
-                            on_release=lambda x: save_dialog.dismiss()
-                        )
-                    ]
-                )
-                save_dialog.open()
-                self.clear_fields()
+            VocabApp.db.insert_vocab(lesson, part, hiragana, katakana, definition)
+            Logger.info("Vocabulary added successfully")
+            save_dialog = MDDialog(
+                title="Success",
+                text="Vocabulary added successfully",
+                size_hint=(0.7, 0.3),
+                buttons=[
+                    MDFlatButton(
+                        text="OK",
+                        on_release=lambda x: save_dialog.dismiss()
+                    )
+                ]
+            )
+            save_dialog.open()
+            self.clear_fields()
             self.parent.current = "ManageVocabScreen"
         except Exception as e:
             Logger.error(f"Error adding vocabulary: {e}")
@@ -356,6 +363,9 @@ class VocabChooserScreen(MDScreen):
 
 
 class VocabCardScreen(MDScreen):
+    def clear_array(self):
+        global vocab_list
+        vocab_list = []
     def next_vocab(self):
         print("Next vocab")
         global count
