@@ -1,6 +1,6 @@
-![](Assets/study_nihongo.jpeg)[^1]
+![](Assets/DALL·E 2023-03-07 08.25.21 - a person studying in a classroom on a table in the form of pixel art.png)[^1]
 
-[^1]: 日本語を勉強する外国人のイラスト, いらすとや
+[^1]: "a person studying in a classroom on a table in the form of pixel art" by DALL E 2, Open AI, Accessed 7th March 2023
 
 # Unit 3 Project: Japanese Vocab Revision App
 
@@ -62,16 +62,42 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Record of Tasks
 
-| Task No | Planned Action                                   | Planned Outcome                                              | Time estimate | Target completion date | Criterion |
-| ------- | ------------------------------------------------ | ------------------------------------------------------------ | ------------- | ---------------------- | --------- |
-| 1       | Planning: First Meeting with client              | Start collecting the context of the problem                  | 6min          | Feb 7                  | A         |
-| 2       | Planning: Defining problem and proposed solution | Start on refining client's requirements and tools needed     | 2hr           | Feb 15                 | A         |
-| 3       | Coding: Initializing codebase                    | To have the base environment of program ready for coding     | 1hr           | Feb 20                 | B         |
-| 4       | Planning : Second Meeting with client            | Decided success criteria                                     | 5min          | Feb 21                 | A         |
-| 5       | Coding: Coding the main part of the program      | Finish coding the program                                    | 5hr           | Mar 1                  | C         |
-| 6       | Creating System Diagrams                         | To have system diagram for application and database finished | 40min         | Mar 2                  | B         |
-| 7       | Coding: Beautifying Graphical User Interface     | To make the interface more user-friendly and easily understandable | 2hr           | Mar 3                  | C         |
-|         |                                                  |                                                              |               |                        |           |
+| Task No | Planned Action                                           | Planned Outcome                                              | Time estimate | Target completion date | Criterion |
+| ------- | -------------------------------------------------------- | ------------------------------------------------------------ | ------------- | ---------------------- | --------- |
+| 1       | Planning: First Meeting with client                      | Start collecting the context of the problem                  | 6 min         | Feb 7                  | A         |
+| 2       | Planning: Defining problem and proposed solution         | Start on refining client's requirements and tools needed     | 2 hr          | Feb 15                 | A         |
+| 3       | Initializing codebase                                    | To have the base environment of program ready for coding     | 1 hr          | Feb 20                 | B         |
+| 4       | Planning : Second Meeting with client                    | Decided success criteria                                     | 5 min         | Feb 21                 | A         |
+| 5       | Creating Wireframe                                       | To have Wireframe diagram finished                           |               |                        |           |
+| 6       | Coding the structure of the database                     | Finalize on the structure of the database                    | 10min         | Mar 1                  | C         |
+| 7       | Initializing database_handler                            | To have a base for the database handler coded and ready for new functions to be coded on top | 10min         | Mar 1                  | C         |
+| 8       | Coding the Login and registration system                 | To have the user access control encrypted and ready for building on the main functions of the application | 30 min        | Mar 1                  | C         |
+| 9       | Coding the landing screen                                | To have the main screen of the application implemented       | 30 min        | Mar 1                  | C         |
+| 10      | Coding the MDDataTable                                   | To have the table ready for data representation              | 15 min        | Mar 1                  | C         |
+| 11      | Coding a file to batch insert data into the database     | To have the process of inserting data into the database for testing be done automatically | 5 min         | Mar 1                  | C         |
+| 12      | Code the database connection for MDDataTable             | To have the database data actually retrieved and shown on the MDDatatable with the correct font formatting for Japanese characters | 40 min        | Mar 1                  | C         |
+| 13      | Coding the Add/Edit function                             | To have the function to insert new vocabualry or edit current entries implemented | 40 min        | Mar 1                  | C         |
+| 14      | Coding the delete function                               | To implement the function to remove vocabulary from the database | 5 min         | Mar 1                  | C         |
+| 15      | Coding the UI elements of the Vocab Chooser              | To have the `VocabChooserScreen` ready for backend connection implementation | 30 min        | Mar 2                  | C         |
+| 16      | Coding the UI elements of the Random Vocab               | To have the `RandomVocabScreen` ready for backend connection implementation | 30 min        | Mar 2                  | C         |
+| 17      | Coding the database connection for both the Vocab Screen | To be able to take in input from both of the selection screen and query the database accordingly | 20 min        | Mar 2                  | C         |
+| 18      | Coding the Vocabulary Cards UI                           | To have the `VocabCardScreen` ready for backend connection implementation | 30 min        | Mar 2                  | C         |
+| 19      | Coding the Vocabulary Card Backend                       | To be able to show vocabulary shown properly.                | 40min         | Mar 2                  | C         |
+| 20      | Coding the points system                                 | To have the functionality of saving and retreving user statistics implemented | 15 min        | Mar 2                  | C         |
+| 21      | Consolidating Code on in the database handler            | To have the database handler code be simplified and easier to understand | 5 min         | Mar 3                  | C         |
+| 22      | Coding the pop up dialogs                                | To have pop up dialogs implemented to improve user experience | 30 min        | Mar 3                  | C         |
+| 23      | Coding Input Validation                                  | To have input validation implemented throughout the application to ensure data inputted is correct | 20 min        | Mar 3                  | C         |
+| 23      | Creating System Diagram                                  | To have system diagram finished                              | 30 min        | Mar 3                  | B         |
+| 24      | Creating UML Diagram                                     | To have the UML diagram finished                             | 30 min        | Mar 3                  | B         |
+| 25      | Creating ER Diagram                                      | To have the ER diagram finished                              | 30 min        | Mar 3                  | B         |
+| 26      | Creating Flow Diagrams                                   | To have the  flow diagrams finished                          | 30 min        | Mar 3                  | B         |
+| 27      | Completing Development Part of Criteria C                | To have interesting parts of my code documented properly     | 2 hr          | Mar 3                  | C         |
+| 28      | Coding: Beautifying Graphical User Interface             | To make the interface more user-friendly and easily understandable | 2 hr          | Mar 3                  | C         |
+| 29      | Filling Computational Thinking                           | To have the Computational Thinking part of Criteria C of the README file finished | 1 hr          | Mar 6                  | C         |
+| 30      | Creating Test Plan                                       | To have a test plan created for confirming if the application works to standard | 1.5 hr        | Mar 7                  | C         |
+| 31      | Consolidating and commenting code                        | To have the code finalized and organized for easy-understanding | 1 hr          | Mar 7                  | C         |
+| 32      | Beautifying README file                                  | To have README file consolidated and completed               | 20 min        | Mar 7                  | B         |
+| 33      | Finish video for Criteria D                              | Video evidence of all the success criterias functioning and working within the developed applicaiton | 10 min        | Mar 7                  | D         |
 
 ## Flow Diagrams
 
@@ -95,10 +121,21 @@ I will design a Python application running on the KivyMD GUI framework which sto
 
 ## Test Plan
 
-| Type    | Input | Process | Anticipated Outcome |
-| ------- | ----- | ------- | ------------------- |
-| *Insert |       |         |                     |
-|         |       |         |                     |
+| Type                | Description                 | Process                                                      | Anticipated Outcome                                          |
+| ------------------- | --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Unit Testing        | User Registration           | 1. Run VocabAppMain.py file <br />2. Click the Register button on the application screen <br />3. Input the appropiate information in each textfield following the hint text<br /> 4. Click Register | After clicking the register button, if the user already exists, a pop up dialog will appear letting the user know that the username already exists. If the password entered and the confirm password don't match, a red message will appear and notify the user that the passwords do not match. If all instructions were correctly followed it will take the user back to the Login screen followed with another pop up dialog indicating that the user is successfully created. |
+| Unit Testing        | User Login                  | 1. Run VocabAppMain.py file <br />2. Input the appropiate information in each textfield following the hint text <br />3. Click Login | After clicking the login, if the user doesn't exist, a pop up dialog will appear letting the user know that the username doesn't exist in the database and will prompt the user to go register. If the user and password exists and matches the records in the database, the application should move to the Home Screen. |
+| Unit Testing        | Logout                      | 1. Login <br />2. Click the Logout button                    | The app should log out and redirect the user back to the login screen. |
+| Integration Testing | Login and Registration      | 1. Run VocabAppMain.py file <br />2. Click the Register button on the application screen<br /> 3. Input the appropiate information in each textfield following the hint text <br />4. Click Register <br />5. Try login with the same credentials registered | If the user followed the on screen instructions properly and registered for a user, then the user should be able to login with the same credentials that were just registered with. |
+| Unit Testing        | Adding Vocabulary           | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Click "Manage Vocab" on the home screen <br />4. Input into the appropriate fields | If the fields are inputted correctly and the program didn't find the same vocabulary in the database, the user will be redirected back to the Manage Vocab screen and a pop up dialog will indicate to the user that a vocabulary is added to the database. The user would be able to confirm this by seeing if the entry shows up on the table. |
+| Unit Testing        | Deleting Vocabulary         | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Click "Manage Vocab" on the home screen <br />4. Click the checkbox next to one of the rows <br />5. Click "Delete Vocab" on the bottom bar | If more than one row is selected, the application will show a popup dialog saying that only one row can be selected. If only one row is checked, the row will be deleted and a pop up dialog should indicate that the vocabulary was deleted successfully. The user would be able to confirm this by seeing if the entry disappered on the table. |
+| Unit Testing        | Editing Vocabulary          | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Click "Manage Vocab" on the home screen<br /> 4. Click the checkbox next to one of the rows <br />5. Click "Edit Vocab" on the bottom bar. <br />6. Change the values as fit. <br />7. Click Save | If more than one row is selected, the application will show a popup dialog saying that only one row can be selected. If only one row is checked, the editing screen should appear and the user would be able to change the values within the entry. After the user hits save, the  application will show a pop up dialog indicating that the entry has been modified successfully. The user would be able to confirm this by seeing if the entry is updated on the table. |
+| Unit Testing        | Choose Vocabulary Mode      | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Click "Choose Vocab" on the home screen <br />4. Input the Lesson and the part of the lesson of the desired vocabulary.<br /> 5. Click start | If the vocab is not found from the database, a pop up dialog would show that no vocabulary is found in the database. If the vocabulary is found, the application should enter the vocab card mode. |
+| Unit Testing        | Random Vocabulary Mode      | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Click "Random Vocab" on the home screen. <br />4. Click start | If no statistics is associated with the user, a pop up dialog will indicated that. Otherwise, the application should enter vocab card mode |
+| Integration Testing | Adding + Showing Vocabulary | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Add a vocabulary <br />4. Choose the vocab from the lesson and part in the Choose Vocab Screen | If the on-screen instructions are followed correctly and no error messages are shown, the user should be able to see the newly added vocab shown on the vocab card screen |
+| Unit Testing        | Point System                | 1. Run VocabAppMain.py file <br />2. Login with previously registered credentials <br />3. Enter the vocab card screen by either choosing vocab or random mode.<br /> 4.click the right or wrong button on the bottom of the screen | The application should show that point is added or deducted in the console. The user can confirm this by querying the database directly. |
+| Unit Testing        | Vocab Card show Japanese    | 1. Run VocabAppMain.py file<br /> 2. Login with previously registered credentials <br />3. Enter the vocab card screen by either choosing vocab or random mode. <br />4.Click the show Japanese button | The application should show the Japanese character of the vocabulary when the button is clicked. When the button is clicked again, the Japanese character should be hidden. |
+| Code Review         | Reviewing Code              | Going through the code and making sure unused parts are removed, variables are named properly and comments are placed appropriated | Easy to understand and easy to debug code for future development. |
 
 # Criteria C: Development
 
@@ -109,7 +146,7 @@ I will design a Python application running on the KivyMD GUI framework which sto
 | PyCharm                    | OOP Structures(Classes)      | Kivymd.app |
 | Python                     | SQL requests                 | Passlib    |
 | SQLite                     | Databases                    | sqlalchemy |
-| KivyMD                     | Encryption                   |            |
+| KivyMD                     | Encryption                   | kivymd.uix |
 | Github Copilot             | For Loops                    |            |
 | ChatGPT                    | If-then-else statements      |            |
 |                            | ORM(Object Relation Mapping) |            |

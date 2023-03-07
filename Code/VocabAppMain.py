@@ -289,6 +289,20 @@ class RandomVocabScreen(MDScreen):
         Logger.info("Choosing random vocabulary...")
         try:
             vocab = VocabApp.db.get_vocab_by_user_stats(current_user.id)
+            if len(vocab) == 0:
+                no_vocab = MDDialog(
+                    title="Error",
+                    text="There are no vocabulary statistics for this user yet",
+                    size_hint=(0.7, 0.3),
+                    buttons=[
+                        MDFlatButton(
+                            text="OK",
+                            on_release=lambda x: no_vocab.dismiss()
+                        )
+                    ]
+                )
+                no_vocab.open()
+                return
             for v in vocab:
                 temp = (v.hiragana, v.katakana, v.definition, v.id)
                 vocab_list.append(temp)
@@ -314,6 +328,20 @@ class VocabChooserScreen(MDScreen):
         global vocab_list
         try:
             vocabs = VocabApp.db.get_vocab_by_lesson_and_part(lesson, part)
+            if len(vocabs) == 0:
+                no_vocab = MDDialog(
+                    title="Error",
+                    text="There are no vocabulary in this lesson and part",
+                    size_hint=(0.7, 0.3),
+                    buttons=[
+                        MDFlatButton(
+                            text="OK",
+                            on_release=lambda x: no_vocab.dismiss()
+                        )
+                    ]
+                )
+                no_vocab.open()
+                return
             for vocab in vocabs:
                 temp = (vocab.hiragana, vocab.katakana, vocab.definition, vocab.id)
                 print(temp)
